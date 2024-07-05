@@ -6,11 +6,24 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom"
+import QuizDescription from './components/app/QuizDescription.tsx'
+import Quiz from './app/routes/quiz/Quiz.tsx'
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    children : [
+      {
+        path: '/',
+        element: <QuizDescription />,
+        index: true
+      },
+      {
+        path: 'quiz',
+        element: <Quiz />
+      }
+    ]
   },
 ]);
 
