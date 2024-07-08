@@ -2,10 +2,14 @@
 import { useState } from 'react';
 import 'tailwindcss/tailwind.css';
 import { Button } from '../ui/button';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const Drawer = () => {
     const [isOpen, setIsOpen] = useState(false);
+    let { id } = useParams();
+
+    const questionId = '2'
+
 
     const toggleDrawer = () => {
         setIsOpen(!isOpen);
@@ -35,7 +39,7 @@ const Drawer = () => {
                         </li>
                     </ul>
                 </div>
-            <Link to="quiz">
+            <Link to={`question/${questionId}`}>
                 <div className='flex justify-center mt-4'><Button onClick={toggleDrawer} className='bg-blue-400'>Got it!</Button></div>
             </Link>
 

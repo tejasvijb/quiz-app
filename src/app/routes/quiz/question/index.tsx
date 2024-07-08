@@ -1,7 +1,7 @@
 import { Volume2 } from "lucide-react";
-import Timer from "../../../components/common/Timer";
+import Timer from "../../../../components/common/Timer";
 
-export default function Quiz() {
+export default function Question() {
     return (
         <div className="bg-slate-100 h-full">
             <div className="flex justify-between items-center bg-white  px-4 py-2">
