@@ -32,26 +32,27 @@ const router = createBrowserRouter([
         path: '/quiz/:quizId/question/:questionId',
         element: <Question />,
       },
-      {
-        path: "/auth",
-        element: <AuthLayout />,
-        children: [
-          {
-            path: "/auth/login",
-            element: <Login />
-          },
-          {
-            path: "/auth/register",
-            element: <Register />
-          },
-          {
-            path: "/auth/forgot-password",
-            element: <ForgotPassword />
-          }
-        ]
-      }
     ]
   },
+
+  {
+    path: "/auth",
+    element: <AuthLayout />,
+    children: [
+      {
+        path: "login",
+        element: <Login />
+      },
+      {
+        path: "register",
+        element: <Register />
+      },
+      {
+        path: "forgot-password",
+        element: <ForgotPassword />
+      }
+    ]
+  }
 
 ]);
 
