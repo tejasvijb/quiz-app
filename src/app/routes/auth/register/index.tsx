@@ -111,7 +111,7 @@ export default function Register() {
           />
           <div className="flex justify-center">
             <Link to={`/auth/login`}>
-              <a className="text-sm text-blue-500"> Already have an account ? Login. </a>
+              <p className="text-sm text-blue-500"> Already have an account ? Login. </p>
             </Link>
           </div>
           <div className="flex flex-col items-center">

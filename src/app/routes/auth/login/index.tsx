@@ -76,7 +76,7 @@ export default function Login() {
           />
           <div className="flex justify-center">
             <Link to={`/auth/forgot-password`}>
-              <a className="text-sm text-blue-500"> Forgot Password </a>
+              <p className="text-sm text-blue-500"> Forgot Password </p>
             </Link>
           </div>
           <div className="flex flex-col items-center">
@@ -86,7 +86,7 @@ export default function Login() {
       </Form>
       <div className="absolute bottom-10">
         <Link to={`/auth/register`}>
-          <a className="text-sm text-blue-500"> Don't have an account ? </a>
+          <p className="text-sm text-blue-500"> Don't have an account ? </p>
         </Link>
       </div>
     </div>

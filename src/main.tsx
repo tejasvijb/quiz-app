@@ -21,15 +21,15 @@ const router = createBrowserRouter([
     element: <AuthLayout />,
     children: [
       {
-        path: "login",
+        path: "/auth/login",
         element: <Login />
       },
       {
-        path: "register",
+        path: "/auth/register",
         element: <Register />
       },
       {
-        path: "forgot-password",
+        path: "/auth/forgot-password",
         element: <ForgotPassword />
       }
     ]
