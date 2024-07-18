@@ -1,4 +1,3 @@
-"use client"
 
 import { valibotResolver } from "@hookform/resolvers/valibot"
 import { useForm } from "react-hook-form"
