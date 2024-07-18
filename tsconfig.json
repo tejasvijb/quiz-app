@@ -9,8 +9,6 @@
     }
   ],
   "compilerOptions": {
-    "strict": true,
-    "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
       "@/*": [

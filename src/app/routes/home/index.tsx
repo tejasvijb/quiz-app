@@ -42,7 +42,7 @@ export default function Home() {
     <div className="p-2">
       <header className="text-center">
         <h1 style={{ background: "linear-gradient(90deg, rgba(130,116,255,1) 0%, rgba(163,90,161,1) 65%)", backgroundClip: "text", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }} className="font-bold text-2xl">
-          Welcome to BrainTease!
+          Welcome to BrainTease!!
         </h1>
         <p className="text-slate-500">Challenge your mind with engaging quizzes and puzzles; earn points, badges, and rewards to amaze your friends and colleagues!</p>
       </header>
