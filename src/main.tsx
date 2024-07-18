@@ -17,27 +17,27 @@ import ForgotPassword from './app/routes/auth/forgot-password/index.tsx';
 
 const router = createBrowserRouter([
   {
-    path: "/auth",
-    element: <AuthLayout />,
-    children: [
-      {
-        path: "/auth/login",
-        element: <Login />
-      },
-      {
-        path: "/auth/register",
-        element: <Register />
-      },
-      {
-        path: "/auth/forgot-password",
-        element: <ForgotPassword />
-      }
-    ]
-  },
-  {
     path: "/",
     element: <Layout />,
     children: [
+      {
+        path: "/auth",
+        element: <AuthLayout />,
+        children: [
+          {
+            path: "/auth/login",
+            element: <Login />
+          },
+          {
+            path: "/auth/register",
+            element: <Register />
+          },
+          {
+            path: "/auth/forgot-password",
+            element: <ForgotPassword />
+          }
+        ]
+      },
       {
         path: "/",
         element: <Home />,
@@ -50,6 +50,7 @@ const router = createBrowserRouter([
         path: '/quiz/:quizId/question/:questionId',
         element: <Question />,
       },
+
     ]
   },
 ]);
