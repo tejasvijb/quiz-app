@@ -10,6 +10,10 @@ import {
 import Home from './app/routes/home'
 import QuizDescription from './app/routes/quiz/index.tsx'
 import Question from './app/routes/quiz/question/index.tsx';
+import AuthLayout from './app/routes/auth/index.tsx';
+import Login from './app/routes/auth/login/index.tsx';
+import Register from './app/routes/auth/register/index.tsx';
+import ForgotPassword from './app/routes/auth/forgot-password/index.tsx';
 
 const router = createBrowserRouter([
   {
@@ -27,8 +31,25 @@ const router = createBrowserRouter([
       {
         path: 'quiz/:quizId/question/:questionId',
         element: <Question />,
+      },
+      {
+        path: "auth",
+        element: <AuthLayout />,
+        children: [
+          {
+            path: "login",
+            element: <Login />
+          },
+          {
+            path: "register",
+            element: <Register />
+          },
+          {
+            path: "forgot-password",
+            element: <ForgotPassword />
+          }
+        ]
       }
-
     ]
   },
 
