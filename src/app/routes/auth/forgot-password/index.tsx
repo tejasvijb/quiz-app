@@ -1,28 +1,31 @@
 
-import { valibotResolver } from "@hookform/resolvers/valibot"
 import { useForm } from "react-hook-form"
-import * as v from "valibot"
+import * as z from "zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../../../components/ui/form"
 import { Input } from "../../../../components/ui/input"
 import { Button } from "../../../../components/ui/button"
 import { Link, useNavigate } from "react-router-dom"
+import { zodResolver } from "@hookform/resolvers/zod"
 
 
-const FormSchema = v.object({
-  email: v.pipe(v.string(), v.email('Please enter a valid email')),
+const FormSchema = z.object({
+  email: z.string()
+    .min(1, { message: "Email is required" })
+    .email({ message: "Invalid email address" })
+    .trim()
 })
 
 export default function ForgotPassowrd() {
   const navigate = useNavigate();
 
   const form = useForm({
-    resolver: valibotResolver(FormSchema),
+    resolver: zodResolver(FormSchema),
     defaultValues: {
       email: "",
     },
   })
 
-  function onSubmit(data: v.InferInput<typeof FormSchema>) {
+  function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log(data)
     navigate("/")
   }

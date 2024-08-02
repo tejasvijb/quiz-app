@@ -1,36 +1,27 @@
 
-import { valibotResolver } from "@hookform/resolvers/valibot"
 import { useForm } from "react-hook-form"
-import * as v from "valibot"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../../../components/ui/form"
 import { Input } from "../../../../components/ui/input"
 import { Button } from "../../../../components/ui/button"
 import { Link, useNavigate } from "react-router-dom"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { loginSchema } from "../../../utils/validations"
+import * as z from 'zod';
 
 
-const FormSchema = v.object({
-  email: v.pipe(v.string(), v.email('Please enter a valid email')),
-  password: v.pipe(
-    v.string(),
-    v.regex(
-      /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-      'Password must be at least 8 characters long, include a capital letter, a number, and a symbol'
-    )
-  )
-})
 
 export default function Login() {
   const navigate = useNavigate();
 
   const form = useForm({
-    resolver: valibotResolver(FormSchema),
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   })
 
-  function onSubmit(data: v.InferInput<typeof FormSchema>) {
+  function onSubmit(data: z.infer<typeof loginSchema>) {
     console.log(data)
     navigate("/")
   }

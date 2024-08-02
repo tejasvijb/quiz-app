@@ -1,55 +1,30 @@
 
-import { valibotResolver } from "@hookform/resolvers/valibot"
 import { useForm } from "react-hook-form"
-import * as v from "valibot"
+import * as z from "zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../../../components/ui/form"
 import { Input } from "../../../../components/ui/input"
 import { Button } from "../../../../components/ui/button"
 import { Link, useNavigate } from "react-router-dom"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { registerSchema } from "../../../utils/validations"
 
 
-const FormSchema = v.object({
-  email: v.pipe(v.string(), v.email('Please enter a valid email')),
-  password: v.pipe(
-    v.string(),
-    v.regex(
-      /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-      'Password must be at least 8 characters long, include a capital letter, a number, and a symbol'
-    )
-  ),
-  confirmPassword: v.string('Re-enter password')
-})
-// const FormSchema = v.pipe(
-//   v.object({
-//     email: v.pipe(v.string(), v.email('Please enter a valid email')),
-//     password: v.pipe(
-//       v.string(),
-//       v.regex(
-//         /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-//         'Password must be at least 8 characters long, include a capital letter, a number, and a symbol'
-//       )
-//     ),
-//     confirmPassword: v.string("Please enter your password again")
-//   }),
-//   v.check(
-//     (input) => input.password === input.confirmPassword,
-//     'The list does not match the length.'
-//   )
-// );
+
 
 export default function Register() {
   const navigate = useNavigate();
 
   const form = useForm({
-    resolver: valibotResolver(FormSchema),
+    resolver: zodResolver(registerSchema),
     defaultValues: {
+      username: "",
       email: "",
       password: "",
       confirmPassword: ""
     },
   })
 
-  function onSubmit(data: v.InferInput<typeof FormSchema>) {
+  function onSubmit(data: z.infer<typeof registerSchema>) {
     console.log(data)
     navigate("/")
   }
@@ -64,6 +39,19 @@ export default function Register() {
       </div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="w-3/4 space-y-6">
+          <FormField
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Username</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter Username" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <FormField
             control={form.control}
             name="email"
