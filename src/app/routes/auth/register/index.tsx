@@ -12,6 +12,7 @@ import { AxiosError } from "axios"
 import { ErrorResponse } from "../../../../api/api.types"
 import Swal from "sweetalert2"
 import { userRegister } from "../../../../api/authApi"
+import { Shell } from "lucide-react"
 
 
 
@@ -29,7 +30,7 @@ export default function Register() {
     },
   })
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: userRegister,
     onSuccess: (data) => {
       console.log(data)
@@ -133,7 +134,10 @@ export default function Register() {
             </Link>
           </div>
           <div className="flex flex-col items-center">
-            <Button style={{ background: "linear-gradient(90deg, rgba(0, 123, 255, 1) 0%, rgba(123, 31, 162, 1) 100%)" }} type="submit">Register</Button>
+            <Button disabled={isPending} style={{ background: "linear-gradient(90deg, rgba(0, 123, 255, 1) 0%, rgba(123, 31, 162, 1) 100%)" }} type="submit">
+              {isPending && <Shell className="mr-2 h-4 w-4 animate-spin" />}
+              Register
+            </Button>
           </div>
         </form>
       </Form>
