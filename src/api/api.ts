@@ -4,7 +4,7 @@ import { ApiRequestConfig, WithAbortFn, ApiExecutor, ApiExecutorArgs, ApiError, 
 
 // Set different base URL based on the environment 
 
-const axiosParams = { baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : '/', }
+const axiosParams = { baseURL: import.meta.env.VITE_BASE_URL }
 
 // Create axios instance with default params 
 const axiosInstance = axios.create(axiosParams)
@@ -74,7 +74,5 @@ const api = (axios: AxiosInstance) => {
       withAbort<T>(axios.put)(url, body, config),
   }
 }
-
-
 
 export default api(axiosInstance)

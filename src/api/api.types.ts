@@ -17,3 +17,8 @@ export type ApiExecutorArgs = | [string, unknown, ApiRequestConfig] | [string, A
 export type ApiRequestConfig = AxiosRequestConfig & { abort?: (cancel: Canceler) => void }
 
 export type ApiError = AxiosError
+
+export type ErrorResponse = {
+  title: string;
+  message: string;
+}
