@@ -19,7 +19,7 @@ export default function Login() {
 
   const navigate = useNavigate();
 
-  const { mutate, isSuccess } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: userLogin,
     onSuccess: (data) => {
       sessionStorage.setItem("authToken", data.data.accessToken)
@@ -30,6 +30,8 @@ export default function Login() {
         showConfirmButton: false,
         timer: 1500
       });
+
+      navigate("/")
     },
     onError: (err: AxiosError<ErrorResponse>) => {
       console.log("err")
@@ -53,9 +55,7 @@ export default function Login() {
   })
 
   function onSubmit(data: z.infer<typeof loginSchema>) {
-    console.log(data)
     mutate(data)
-    if (isSuccess) navigate("/")
   }
 
   return (
