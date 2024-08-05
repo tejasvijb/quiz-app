@@ -7,6 +7,11 @@ import { Button } from "../../../../components/ui/button"
 import { Link, useNavigate } from "react-router-dom"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { registerSchema } from "../../../utils/validations"
+import { useMutation } from "@tanstack/react-query"
+import { AxiosError } from "axios"
+import { ErrorResponse } from "../../../../api/api.types"
+import Swal from "sweetalert2"
+import { userRegister } from "../../../../api/authApi"
 
 
 
@@ -24,9 +29,34 @@ export default function Register() {
     },
   })
 
+  const { mutate } = useMutation({
+    mutationFn: userRegister,
+    onSuccess: (data) => {
+      console.log(data)
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Registered !",
+        showConfirmButton: false,
+        timer: 1500
+      });
+      navigate("/auth/login")
+    },
+    onError: (err: AxiosError<ErrorResponse>) => {
+      console.log("err")
+      Swal.fire({
+        title: 'Error!',
+        text: err.response?.data?.message || err.message || "Something Went wrong!",
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      })
+
+    }
+
+  })
+
   function onSubmit(data: z.infer<typeof registerSchema>) {
-    console.log(data)
-    navigate("/")
+    mutate(data)
   }
 
   return (

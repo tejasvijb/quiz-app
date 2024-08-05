@@ -7,11 +7,42 @@ import { Link, useNavigate } from "react-router-dom"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { loginSchema } from "../../../utils/validations"
 import * as z from 'zod';
+import { useMutation } from "@tanstack/react-query"
+import { userLogin } from "../../../../api/authApi"
+import { AxiosError } from "axios"
+import { ErrorResponse } from "../../../../api/api.types"
+import Swal from 'sweetalert2'
 
 
 
 export default function Login() {
+
   const navigate = useNavigate();
+
+  const { mutate, isSuccess } = useMutation({
+    mutationFn: userLogin,
+    onSuccess: (data) => {
+      sessionStorage.setItem("authToken", data.data.accessToken)
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Logged In",
+        showConfirmButton: false,
+        timer: 1500
+      });
+    },
+    onError: (err: AxiosError<ErrorResponse>) => {
+      console.log("err")
+      Swal.fire({
+        title: 'Error!',
+        text: err.response?.data?.message || err.message || "Something Went wrong!",
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      })
+
+    }
+
+  })
 
   const form = useForm({
     resolver: zodResolver(loginSchema),
@@ -23,7 +54,8 @@ export default function Login() {
 
   function onSubmit(data: z.infer<typeof loginSchema>) {
     console.log(data)
-    navigate("/")
+    mutate(data)
+    if (isSuccess) navigate("/")
   }
 
   return (
