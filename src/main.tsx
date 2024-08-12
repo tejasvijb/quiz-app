@@ -15,6 +15,7 @@ import Login from './app/routes/auth/login/index.tsx';
 import Register from './app/routes/auth/register/index.tsx';
 import ForgotPassword from './app/routes/auth/forgot-password/index.tsx';
 import ProtectedRoute from './components/common/ProtectedRoute.tsx';
+import CreateQuiz from './app/routes/create/index.tsx';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,12 @@ const router = createBrowserRouter([
             element: <ForgotPassword />
           }
         ]
+      },
+      {
+        path: "/create",
+        element: <ProtectedRoute>
+          <CreateQuiz />
+        </ProtectedRoute>,
       },
       {
         path: "/",

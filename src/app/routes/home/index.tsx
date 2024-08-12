@@ -1,5 +1,7 @@
+import { Plus } from "lucide-react";
 import { IQuizCard } from "../../types/home";
 import QuizCard from "./components/QuizCard";
+import { Link } from "react-router-dom";
 
 
 
@@ -21,18 +23,6 @@ const QuizData: IQuizCard[] = [
     date: 'Monday Quiz (July 8, 2024)',
     img: '/quiztime.jpg',
     title: 'Lunar Pursuit dolor'
-  },
-  {
-    id: '4',
-    date: 'Monday Quiz (July 8, 2024)',
-    img: '/quiztime.jpg',
-    title: 'Lunar Pursuit dolor'
-  },
-  {
-    id: '5',
-    date: 'Monday Quiz (July 8, 2024)',
-    img: '/quiztime.jpg',
-    title: 'Lunar Pursuit dolor'
   }
 ]
 
@@ -50,6 +40,12 @@ export default function Home() {
       <div className="grid grid-cols-2 gap-2 mt-8 ">
 
         {QuizData.map(quizItem => <QuizCard id={quizItem.id} key={quizItem.id} date={quizItem.date} img={quizItem.img} title={quizItem.title} />)}
+        <Link to="/create">
+          <div className="p-2 border h-full flex flex-col justify-center items-center cursor-pointer rounded-md">
+            <Plus size={50} color="grey" />
+            <p className="text-center text-gray-500">Create</p>
+          </div>
+        </Link>
 
       </div>
     </div>
